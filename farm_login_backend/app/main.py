@@ -2,7 +2,11 @@
 from fastapi import FastAPI
 
 
-app = FastAPI(title="FARM Login Backend", description="Backend for the FARM Login", version="0.1.0")
+app = FastAPI(
+    title="FARM Login Backend", 
+    description="Backend for the FARM Login", 
+    version="0.1.0"
+    )
 
 @app.get(
     "/", 
