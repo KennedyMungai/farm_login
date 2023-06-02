@@ -3,18 +3,19 @@ from fastapi import FastAPI
 
 
 app = FastAPI(
-    title="FARM Login Backend", 
-    description="Backend for the FARM Login", 
+    title="FARM Login Backend",
+    description="Backend for the FARM Login",
     version="0.1.0"
-    )
+)
+
 
 @app.get(
-    "/", 
-    name='Root', 
-    description="The root endpoint", 
+    "/",
+    name='Root',
+    description="The root endpoint",
     response_model=dict[str, str],
     tags=['Root']
-    )
+)
 async def root() -> dict[str, str]:
     """The root endpoint for the backend
 
