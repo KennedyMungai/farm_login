@@ -7,10 +7,12 @@
 	"settings": {
 		"cSpell.words": [
 			"autoflush",
+			"DBAPI",
 			"dotenv",
 			"farmlogin",
 			"ondelete",
 			"onupdate",
+			"poolclass",
 			"pymysql",
 			"sessionmaker",
 			"simpleblogbackend"
