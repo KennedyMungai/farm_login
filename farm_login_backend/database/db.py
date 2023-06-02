@@ -24,6 +24,8 @@ Base = declarative_base()
 SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 
 # Database Dependency
+
+
 def get_db():
     """The database dependency
 
@@ -31,7 +33,7 @@ def get_db():
         _db: A database session
     """
     _db = SessionLocal()
-    
+
     try:
         yield _db
     finally:
