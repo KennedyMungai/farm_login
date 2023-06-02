@@ -21,15 +21,17 @@ class Sex(str, Enum):
 
 class Role(Base):
     __tablename__ = "roles"
-    
+
     id = Column(String, primary_key=True, nullable=False)
     role_name = Column(String())
-    
+
 
 class UserRole(Base):
-    user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True, nullable=False)
-    role_id = Column(String, ForeignKey("roles.id", ondelete="CASCADE"), primary_key=True, nullable=False)
-    
+    user_id = Column(String, ForeignKey(
+        "users.id", ondelete="CASCADE"), primary_key=True, nullable=False)
+    role_id = Column(String, ForeignKey(
+        "roles.id", ondelete="CASCADE"), primary_key=True, nullable=False)
+
     users = relationship('Users', back_populates='roles')
     roles = relationship('Role', back_populates='users')
 
@@ -50,7 +52,7 @@ class Person(Base):
     phone_number = Column(String(12))
     created_at = Column(datetime(), default=datetime.now())
     updated_at = Column(datetime(), onupdate=datetime.now())
-    
+
     users = relationship('Users', back_populates='persons')
 
 
@@ -69,7 +71,8 @@ class Users(Base):
     created_at = Column(datetime(), default=datetime.now())
     updated_at = Column(datetime(), onupdate=datetime.now())
 
-    person_id = Column(String, ForeignKey("persons.id", ondelete="CASCADE"), nullable=False)
+    person_id = Column(String, ForeignKey(
+        "persons.id", ondelete="CASCADE"), nullable=False)
     person = relationship('Person', back_populates='users')
-    
+
     roles: List[Role] = relationship(back_populates='users')
