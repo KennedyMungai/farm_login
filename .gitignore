@@ -1,0 +1,5 @@
+node_modules/
+requirements.txt
+.env
+__pycache__/
+venv/
