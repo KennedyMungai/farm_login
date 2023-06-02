@@ -9,6 +9,7 @@
 			"autoflush",
 			"dotenv",
 			"farmlogin",
+			"ondelete",
 			"onupdate",
 			"pymysql",
 			"sessionmaker",
