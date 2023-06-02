@@ -6,8 +6,10 @@
 	],
 	"settings": {
 		"cSpell.words": [
+			"autoflush",
 			"dotenv",
 			"farmlogin",
+			"pymysql",
 			"sessionmaker",
 			"simpleblogbackend"
 		],
