@@ -47,5 +47,7 @@ class Users(Base):
     username = Column(String(255), unique=True)
     email = Column(String(255), unique=True)
     password = Column(String(255))
+    created_at = Column(datetime(), default=datetime.now())
+    updated_at = Column(datetime(), onupdate=datetime.now())
 
     person_id = Column(String, ForeignKey("persons.id", ondelete="CASCADE"), nullable=False)
