@@ -25,6 +25,11 @@ SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 
 # Database Dependency
 def get_db():
+    """The database dependency
+
+    Yields:
+        _db: A database session
+    """
     _db = SessionLocal()
     
     try:
