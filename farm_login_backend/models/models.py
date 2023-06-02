@@ -1,6 +1,7 @@
 """The file that holds all the models for the app"""
 from datetime import datetime
 from enum import Enum
+from typing import List
 
 from database.db import Base
 from sqlalchemy import Column, Date, Integer, String, ForeignKey
@@ -16,6 +17,21 @@ class Sex(str, Enum):
     """
     MALE = "MALE"
     FEMALE = "FEMALE"
+
+
+class Role(Base):
+    __tablename__ = "roles"
+    
+    id = Column(String, primary_key=True, nullable=False)
+    role_name = Column(String())
+    
+
+class UserRole(Base):
+    user_id = Column(String, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True, nullable=False)
+    role_id = Column(String, ForeignKey("roles.id", ondelete="CASCADE"), primary_key=True, nullable=False)
+    
+    users = relationship('Users', back_populates='roles')
+    roles = relationship('Role', back_populates='users')
 
 
 class Person(Base):
@@ -55,3 +71,5 @@ class Users(Base):
 
     person_id = Column(String, ForeignKey("persons.id", ondelete="CASCADE"), nullable=False)
     person = relationship('Person', back_populates='users')
+    
+    roles: List[Role] = relationship(back_populates='users')
