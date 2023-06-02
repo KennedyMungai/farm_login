@@ -25,7 +25,7 @@ class Person(Base):
         Base (Declarative Base): The base for the model data
     """
     __tablename__ = "persons"
-    
+
     id = Column(Integer, primary_key=True, index=True, nullable=False)
     name = Column(String(255))
     birth = Column(Date)
@@ -34,10 +34,11 @@ class Person(Base):
     phone_number = Column(String(12))
     created_at = Column(datetime(), default=datetime.now())
     updated_at = Column(datetime(), onupdate=datetime.now())
-    
-    users = relationship("users", back_populates="person", cascade="all, delete")
-    
-    
+
+    users = relationship("users", back_populates="person",
+                         cascade="all, delete")
+
+
 class Users(Base):
     """The Users model
 
@@ -45,11 +46,12 @@ class Users(Base):
         Base (Declarative Base): The base for all the models
     """
     __tablename__ = "users"
-    
+
     id = Column(String, primary_key=True, index=True, nullable=False)
     username = Column(String(255), unique=True)
     email = Column(String(255), unique=True)
     password = Column(String(255))
 
-    person_id = relationship("persons", back_populates="id", cascade="all, delete")
+    person_id = relationship(
+        "persons", back_populates="id", cascade="all, delete")
     person = relationship(back_populates="users")
