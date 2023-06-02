@@ -3,11 +3,17 @@ from datetime import datetime
 from enum import Enum
 
 from database.db import Base
-from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy import Column, Date, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 
 class Sex(str, Enum):
+    """The gender enum
+
+    Args:
+        str (_type_): String
+        Enum (_type_): Enum
+    """
     MALE = "MALE"
     FEMALE = "FEMALE"
 
@@ -29,4 +35,21 @@ class Person(Base):
     created_at = Column(datetime(), default=datetime.now())
     updated_at = Column(datetime(), onupdate=datetime.now())
     
-    users = relationship("User", back_populates="person", cascade="all, delete")
+    users = relationship("users", back_populates="person", cascade="all, delete")
+    
+    
+class Users(Base):
+    """The Users model
+
+    Args:
+        Base (Declarative Base): The base for all the models
+    """
+    __tablename__ = "users"
+    
+    id = Column(String, primary_key=True, index=True, nullable=False)
+    username = Column(String(255), unique=True)
+    email = Column(String(255), unique=True)
+    password = Column(String(255))
+
+    person_id = relationship("persons", back_populates="id", cascade="all, delete")
+    person = relationship(back_populates="users")
