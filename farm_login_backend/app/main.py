@@ -8,7 +8,8 @@ app = FastAPI(title="FARM Login Backend", description="Backend for the FARM Logi
     "/", 
     name='Root', 
     description="The root endpoint", 
-    response_model=dict[str, str]
+    response_model=dict[str, str],
+    tags=['Root']
     )
 async def root() -> dict[str, str]:
     """The root endpoint for the backend
