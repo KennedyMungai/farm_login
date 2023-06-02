@@ -1,9 +1,10 @@
 """The file that holds all the models for the app"""
-from database.db import Base
-from enum import Enum
-from sqlalchemy import Column, Integer, String, Date
-from sqlalchemy.orm import relationship
 from datetime import datetime
+from enum import Enum
+
+from database.db import Base
+from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy.orm import relationship
 
 
 class Sex(str, Enum):
