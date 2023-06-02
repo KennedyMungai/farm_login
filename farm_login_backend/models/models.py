@@ -4,7 +4,6 @@ from enum import Enum
 
 from database.db import Base
 from sqlalchemy import Column, Date, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
 
 
 class Sex(str, Enum):
@@ -35,9 +34,6 @@ class Person(Base):
     created_at = Column(datetime(), default=datetime.now())
     updated_at = Column(datetime(), onupdate=datetime.now())
 
-    users = relationship("users", back_populates="person",
-                         cascade="all, delete")
-
 
 class Users(Base):
     """The Users model
@@ -52,6 +48,4 @@ class Users(Base):
     email = Column(String(255), unique=True)
     password = Column(String(255))
 
-    person_id = relationship(
-        "persons", back_populates="id", cascade="all, delete")
-    person = relationship(back_populates="users")
+    person_id = Column(String, ForeignKey("persons.id", ondelete="CASCADE"), nullable=False)
